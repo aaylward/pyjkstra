@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 class Edge(object):
     def __init__(self, v, w, weight):
         self.v = v
@@ -15,12 +17,9 @@ def dijkstra(graph, origin):
     seen = set()
     seen.add(origin)
 
-    distances = {origin: 0}
-    for n in graph.nodes:
-        if n != origin:
-            distances[n] = 1000000
+    distances = defaultdict(lambda: 1000000)
+    distances[origin] = 0
 
-    
     while len(seen) < len(graph.nodes):
         next_min_weight = None
         next_edge = None
@@ -39,13 +38,17 @@ def dijkstra(graph, origin):
 
 def parse_line(line):
     parts = [x for x in line.strip().split('\t') if x.strip()]
+
     if len(parts) < 2:
         return None, None
+
     v = int(parts.pop(0))
     edges = []
+
     for part in parts:
         p = [int(x) for x in part.split(',')]
         edges.append(Edge(v, p[0], p[1]))
+
     return v, edges
 
 
@@ -55,8 +58,12 @@ def main():
 
         nodes = []
         edges = []
+
         for line in lines:
-            node, more = parse_line(line)
+            try:
+                node, more = parse_line(line)
+            except Exception:
+                continue
             if node is not None:
                 nodes.append(node)
                 edges += more
@@ -65,4 +72,5 @@ def main():
 
     print dijkstra(graph, 1)
 
-if __name__ == '__main__': main()
+if __name__ == '__main__':
+    main()
