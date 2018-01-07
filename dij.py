@@ -42,10 +42,10 @@ def parse_line(line):
     if len(parts) < 2:
         return None, None
 
-    v = int(parts.pop(0))
+    v = int(parts[0])
     edges = []
 
-    for part in parts:
+    for part in parts[1:]:
         w, weight = [int(x) for x in part.split(',')]
         edges.append(Edge(v, w, weight))
 
