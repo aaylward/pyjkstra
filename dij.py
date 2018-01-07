@@ -22,17 +22,17 @@ def dijkstra(graph, origin):
 
     
     while len(seen) < len(graph.nodes):
-        min_from_seen = None
+        next_min_weight = None
         next_edge = None
 
         for edge in graph.edges:
             if edge.v in seen and edge.w not in seen:
-                if min_from_seen is None or distances[edge.v] + edge.weight < min_from_seen:
-                    min_from_seen = distances[edge.v] + edge.weight
+                if next_min_weight is None or distances[edge.v] + edge.weight < next_min_weight:
+                    next_min_weight = distances[edge.v] + edge.weight
                     next_edge = edge
 
         seen.add(next_edge.w)
-        distances[next_edge.w] = min_from_seen
+        distances[next_edge.w] = next_min_weight
 
     return distances
 
