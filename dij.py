@@ -56,21 +56,19 @@ def main():
     with open("dij.txt") as f:
         lines = f.readlines()
 
-        nodes = []
-        edges = []
+    nodes = []
+    edges = []
 
-        for line in lines:
-            try:
-                node, more = parse_line(line)
-            except Exception:
-                continue
-            if node is not None:
-                nodes.append(node)
-                edges += more
+    for line in lines:
+        try:
+            node, more = parse_line(line)
+        except Exception:
+            continue
+        if node is not None:
+            nodes.append(node)
+            edges += more
 
-    graph = Graph(nodes, edges)
-
-    print dijkstra(graph, 1)
+    print dijkstra(Graph(nodes, edges), 1)
 
 if __name__ == '__main__':
     main()
