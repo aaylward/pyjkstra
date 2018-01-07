@@ -46,8 +46,8 @@ def parse_line(line):
     edges = []
 
     for part in parts:
-        p = [int(x) for x in part.split(',')]
-        edges.append(Edge(v, p[0], p[1]))
+        w, weight = [int(x) for x in part.split(',')]
+        edges.append(Edge(v, w, weight))
 
     return v, edges
 
@@ -70,5 +70,7 @@ def main():
 
     print dijkstra(Graph(nodes, edges), 1)
 
+
 if __name__ == '__main__':
     main()
+
